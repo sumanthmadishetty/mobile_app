@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {Platform, StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import {Platform, StyleSheet, Text, View, TextInput, Button, FlatList } from 'react-native';
 import ListData from './ListData';
+import ListData from './ListPlaces';
 
 const styles = StyleSheet.create({
   placesContainer: {
@@ -11,10 +12,12 @@ const styles = StyleSheet.create({
     width: '30%',
     alignContent: 'center',
     marginLeft: 10,
+    justifyContent: 'center',
   },
   textInput: {
-    color: 'white',
-    backgroundColor: 'red',
+    borderWidth: 1,
+    borderColor: 'grey',
+    // backgroundColor: 'red',
     width: '70%'
   }
 })
@@ -30,7 +33,11 @@ class AddPlaces extends Component {
 
    onClickAdd = () => {
      const { placesList, placeName } = this.state;
-     this.setState((prevState) => ({placesList: prevState.placesList.concat(placeName)}), () => {this.setState({ placeName: '' })})
+     this.setState((prevState) => ({placesList: prevState.placesList.concat({ id: Math.random(), name: placeName, Image: ""})}), () => {this.setState({ placeName: '' })})
+   }
+
+   removePlace = (i) => {
+     this.setState(state => ({ placesList: state.placesList.filter((place) => place.id !== i ) }))
    }
 
   render() {
@@ -39,10 +46,11 @@ class AddPlaces extends Component {
       <View style={{ width: '100%' }}>
       <View style={styles.placesContainer}>
         <TextInput style={styles.textInput} value={placeName} onChangeText={(placeName) => this.setState({ placeName })} />
-        <Button disabled={!placeName.length} color=  'blue' style={styles.addButton} title={"Add"} onPress={this.onClickAdd} />
+        <Button disabled={!placeName.length} color=  'blue' style={styles.addButton} title={"Add Place"} onPress={this.onClickAdd} />
       </View>
       <View>
-        <ListData data={placesList} />
+      <FlatList data={placesList} renderItem={(item) => <ListData data={item} />} />
+        {/* <ListData data={placesList} onPressPlaces={this.removePlace} /> */}
       </View>
 
       </View>

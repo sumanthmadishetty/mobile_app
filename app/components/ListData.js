@@ -1,5 +1,5 @@
 import React from 'react';
-import {Platform, StyleSheet, Text, View, TextInput } from 'react-native';
+import {Platform, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 const styles = StyleSheet.create({
   lisData: {
@@ -18,10 +18,15 @@ const styles = StyleSheet.create({
 
 
 const listData = (props) => {
-    const { data = [] } = props;
+    const { data, onPressPlaces } = props;
+    alert(data)
     return (
         <View>
-          {data.map((item, index) => <Text style={styles.list} key={index}>{item}</Text>)}            
+            <TouchableOpacity key={index} onPress={() => {onPressPlaces(index)}}>
+              <View>
+                <Text style={styles.list} key={index}>{item}</Text>
+              </View>
+            </TouchableOpacity>
         </View>
     );
 }
