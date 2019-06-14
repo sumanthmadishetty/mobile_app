@@ -8,6 +8,7 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TextInput } from 'react-native';
+import { AddPlaces } from './app/components';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -21,8 +22,7 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome!</Text>
-        <TextInput defaultValue="asdasd" onFocus={() => alert('onco')}/>
+        <AddPlaces />
       </View>
     );
   }
@@ -31,15 +31,10 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: 'yellow',
-  },
-  welcome: {
-    fontSize: 20,
     textAlign: 'center',
-    margin: 10,
-    color: 'red'
+    padding: 10,
   },
   instructions: {
     textAlign: 'center',
